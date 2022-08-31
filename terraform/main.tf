@@ -27,7 +27,7 @@ module "eks" {
     source = "./modules/eks"
     prefix = var.prefix
     vpc_id = module.new-vpc.vpc_id
-    cluster_name = var.cluster_name
+    cluster_name = var.AWS_CLUSTER_NAME
     retention_days = var.retention_days
     subnet_ids = module.new-vpc.subnet_ids
     desired_size = var.desired_size
