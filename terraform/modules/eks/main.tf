@@ -40,10 +40,10 @@ resource "aws_iam_role_policy_attachment" "cluster-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
-resource "aws_cloudwatch_log_group" "log" {
-  name = "/aws/eks-${var.prefix}/${var.prefix}-${var.cluster_name}/cluster"
-  retention_in_days = var.retention_days
-}
+# resource "aws_cloudwatch_log_group" "log" {
+#   name = "/aws/eks-${var.prefix}/${var.prefix}-${var.cluster_name}/cluster"
+#   retention_in_days = var.retention_days
+# }
 
 resource "aws_eks_cluster" "cluster" {
   name = "${var.prefix}-${var.cluster_name}"
@@ -54,7 +54,7 @@ resource "aws_eks_cluster" "cluster" {
       security_group_ids = [aws_security_group.sg.id]
   }
   depends_on = [
-    aws_cloudwatch_log_group.log,
+    # aws_cloudwatch_log_group.log,
     aws_iam_role_policy_attachment.cluster-AmazonEKSVPCResourceController,
     aws_iam_role_policy_attachment.cluster-AmazonEKSClusterPolicy,
   ]
